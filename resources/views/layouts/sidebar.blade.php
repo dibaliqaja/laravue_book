@@ -19,8 +19,8 @@
                 </ul>
             </li>
             <li>
-                <a class="nav-link" href="#"><i class="fas fa-user"></i>
-                    <span>Data Admin</span>
+                <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-user"></i>
+                    <span>Data Users</span>
                 </a>
             </li>
             <li>
