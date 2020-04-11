@@ -54,6 +54,9 @@
         </div>
         <div class="form-group">
             <label for="avatar">Avatar</label><br>
+            @if ($user->avatar)
+                <img src="{{ asset('storage/' . $user->avatar) }}" width="120px" alt="image_category"><br><br>
+            @endif
             <input type="file" name="avatar" id="avatar"><br>
             <small class="text-muted">Note: Kosongkan jika tidak ingin mengubah avatar</small>
         </div>

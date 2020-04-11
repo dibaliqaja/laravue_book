@@ -14,7 +14,7 @@
 
     <a href="{{ route('users.create') }}" class="btn btn-primary">Add User</a><br><br>
 
-    <form action="{{ route('users.index') }}">
+    {{-- <form action="{{ route('users.index') }}">
         <div class="row">
             <div class="col-md-6">
                 <input type="text" name="keyword" class="form-control" value="{{ Request::get('keyword') }}" placeholder="Input Email for filter...">
@@ -29,7 +29,25 @@
                 <input type="submit" value="Filter" class="btn btn-primary">
             </div>
         </div>
-    </form>
+    </form> --}}
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{{ route('users.index') }}">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Input Email for filter..." value="{{ Request::get('keyword') }}">
+                    <div class="input-group-append">
+                        <input type="submit" value="Filter" class="btn btn-primary">
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-6">
+            <input type="radio" name="status" id="active" value="ACTIVE" {{ Request::get('status') == 'ACTIVE' ? 'checked' : ''}}>
+            <label for="active">Active</label><br>
+            <input type="radio" name="status" id="inactive" value="INACTIVE" {{ Request::get('status') == 'INACTIVE' ? 'checked' : ''}}>
+            <label for="active">Inactive</label>
+            </form>
+        </div>
+    </div>
     <br>
     <table class="table table-hover">
         <thead>
