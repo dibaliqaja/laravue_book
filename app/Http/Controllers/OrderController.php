@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function($request, $next) {
+            if (Gate::allows('manage-orders')) return $next($request);
+            abort(403);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *

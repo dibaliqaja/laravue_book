@@ -8,9 +8,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function($request, $next) {
+            if (Gate::allows('manage-categories')) return $next($request);
+            abort(403);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
