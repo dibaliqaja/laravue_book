@@ -27,6 +27,11 @@
                     <span>Data Books</span>
                 </a>
             </li>
+            <li>
+                <a class="nav-link" href="{{ route('orders.index') }}"><i class="fas fa-history"></i>
+                    <span>Data Orders</span>
+                </a>
+            </li>
         </ul>
 
     </aside>
