@@ -1,5 +1,5 @@
 @extends('layouts.global')
-@section('title_page','Data Categories')
+@section('title_page','Data Categories Trashed')
 
 @section('content')
 

@@ -120,7 +120,6 @@ class UserController extends Controller
             $file = $request->file('avatar')->store('avatars', 'public');
             $user->avatar = $file;
         }
-
         $user->save();
         return redirect()->route('users.edit', [$id])->with('status', 'User Successfully Updated.');
     }

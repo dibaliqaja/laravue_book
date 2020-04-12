@@ -16,6 +16,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -64,7 +65,6 @@
                     </li>
                     @else
                         <li class="nav-item"><a href="{{ url('login') }}" class="nav-link">Login</a></li>
-                        <li class="nav-item"><a href="{{ url('register') }}" class="nav-link">Register</a></li>
                     @endif
                 </ul>
             </nav>
