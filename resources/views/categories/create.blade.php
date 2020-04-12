@@ -16,11 +16,17 @@
     @csrf
     <div class="form-group">
         <label for="name">Category Name</label>
-        <input type="text" class="form-control" name="name" id="name" placeholder="Category Name">
+        <input type="text" class="form-control" name="name" id="name" placeholder="Category Name" value="{{ old('name') }}">
+        <div class="invalid-feedback">
+            {{ $errors->first('name') }}
+        </div>
     </div>
     <div class="form-group">
         <label for="avatar">Category Image</label><br>
         <input type="file" name="image" id="image">
+        <div class="invalid-feedback">
+            {{ $errors->first('image') }}
+        </div>
     </div>
     <div class="form-group">
         <input class="btn btn-primary" type="submit" value="Create Category">

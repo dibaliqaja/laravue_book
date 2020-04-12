@@ -17,7 +17,10 @@
     <input type="hidden" value="PUT" name="_method">
     <div class="form-group">
         <label for="name">Category Name</label>
-        <input type="text" class="form-control" name="name" id="name" value="{{ $category->name }}">
+        <input type="text" class="form-control" name="name" id="name" value="{{ old('name') ? old('name') : $category->name }}">
+        <div class="invalid-feedback">
+            {{ $errors->first('name') }}
+        </div>
     </div>
     <div class="form-group">
         <label for="avatar">Category Image</label><br>

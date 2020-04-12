@@ -16,61 +16,88 @@
         @csrf
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="Full Name">
+            <input type="text" class="form-control {{ $errors->first('name') ? "is-invalid" : ""}}" name="name" id="name" placeholder="Full Name" value="{{ old('name') }}">
+            <div class="invalid-feedback">
+                {{ $errors->first('name') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+            <input type="text" class="form-control {{ $errors->first('username') ? "is-invalid" : ""}}" name="username" id="username" placeholder="Username" value="{{ old('username') }}">
+            <div class="invalid-feedback">
+                {{ $errors->first('username') }}
+            </div>
         </div>
         <div class="form-group">
             <label class="d-block">Roles</label>
             <div class="form-check">
-                <input class="form-check-input" name="roles[]" type="checkbox" id="ADMIN" value="ADMIN">
+                <input class="form-check-input {{ $errors->first('roles') ? "is-invalid" : ""}}" name="roles[]" type="checkbox" id="ADMIN" value="ADMIN">
                 <label class="form-check-label" for="ADMIN">
                     Administrator
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" name="roles[]" type="checkbox" id="STAFF" value="STAFF">
+                <input class="form-check-input {{ $errors->first('roles') ? "is-invalid" : ""}}" name="roles[]" type="checkbox" id="STAFF" value="STAFF">
                 <label class="form-check-label" for="STAFF">
                     Staff
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" name="roles[]" type="checkbox" id="CUSTOMER" value="CUSTOMER">
+                <input class="form-check-input {{ $errors->first('roles') ? "is-invalid" : ""}}" name="roles[]" type="checkbox" id="CUSTOMER" value="CUSTOMER">
                 <label class="form-check-label" for="CUSTOMER">
                     Customer
                 </label>
             </div>
+            <div class="invalid-feedback">
+                {{ $errors->first('roles') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input type="text" class="form-control" name="phone" id="phone" placeholder="08XXXXXXXXXX">
+            <input type="text" class="form-control {{ $errors->first('phone') ? "is-invalid" : ""}}" name="phone" id="phone" placeholder="08XXXXXXXXXX" value="{{ old('phone') }}">
+            <div class="invalid-feedback">
+                {{ $errors->first('phone') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="address">Address</label>
-            <textarea class="form-control" name="address" id="address" placeholder="Address"></textarea>
+            <textarea class="form-control {{ $errors->first('address') ? "is-invalid" : ""}}" name="address" id="address" placeholder="Address">{{ old('address') }}</textarea>
+            <div class="invalid-feedback">
+                {{ $errors->first('address') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="avatar">Avatar</label><br>
-            <input type="file" name="avatar" id="avatar">
+            <input class="{{ $errors->first('avatar') ? "is-invalid" : ""}}" type="file" name="avatar" id="avatar">
+            <div class="invalid-feedback">
+                {{ $errors->first('avatar') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="user@mail.com">
+            <input type="email" class="form-control {{ $errors->first('email') ? "is-invalid" : ""}}" name="email" id="email" placeholder="user@mail.com" value="{{ old('email') }}">
+            <div class="invalid-feedback">
+                {{ $errors->first('email') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            <input type="password" class="form-control {{ $errors->first('password') ? "is-invalid" : ""}}" name="password" id="password" placeholder="Password">
+            <div class="invalid-feedback">
+                {{ $errors->first('password') }}
+            </div>
         </div>
         <div class="form-group">
-            <label for="password_confirm">Password Confirmation</label>
-            <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="Password Confirmation">
+            <label for="password_confirmation">Password Confirmation</label>
+            <input type="password" class="form-control {{ $errors->first('password_confirmation') ? "is-invalid" : ""}}" name="password_confirmation" id="password_confirmation" placeholder="Password Confirmation">
+            <div class="invalid-feedback">
+                {{ $errors->first('password_confirmation') }}
+            </div>
         </div>
         <div class="form-group">
             <label class="d-block">Status</label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="status" id="ACTIVE" value="ACTIVE" checked>
+                <input class="form-check-input {{ $errors->first('status') ? "is-invalid" : ""}}" type="radio" name="status" id="ACTIVE" value="ACTIVE" checked>
                 <label class="form-check-label" for="status">
                     Active
                 </label>
@@ -82,10 +109,13 @@
                     Inactive
                 </label>
             </div>
+            <div class="invalid-feedback">
+                {{ $errors->first('status') }}
+            </div>
         </div>
         <div class="form-group">
             <input class="btn btn-primary" type="submit" value="Create User">
         </div>
     </form>
-    
+
 @endsection

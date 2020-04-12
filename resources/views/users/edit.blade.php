@@ -18,39 +18,47 @@
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" name="name" id="name" value="{{ $user->name }}">
-        </div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username" value="{{ $user->username }}">
+            <div class="invalid-feedback">
+                {{ $errors->first('name') }}
+            </div>
         </div>
         <div class="form-group">
             <label class="d-block">Roles</label>
             <div class="form-check">
-                <input {{ in_array("ADMIN", json_decode($user->roles)) ? "checked" : "" }} class="form-check-input" name="roles[]" type="checkbox" id="ADMIN" value="ADMIN">
+                <input {{ in_array("ADMIN", json_decode($user->roles)) ? "checked" : "" }} class="form-check-input {{ $errors->first('roles') ? "is-invalid" : "" }}" name="roles[]" type="checkbox" id="ADMIN" value="ADMIN">
                 <label class="form-check-label" for="ADMIN">
                     Administrator
                 </label>
             </div>
             <div class="form-check">
-                <input {{ in_array("STAFF", json_decode($user->roles)) ? "checked" : "" }} class="form-check-input" name="roles[]" type="checkbox" id="STAFF" value="STAFF">
+                <input {{ in_array("STAFF", json_decode($user->roles)) ? "checked" : "" }} class="form-check-input {{ $errors->first('roles') ? "is-invalid" : "" }}" name="roles[]" type="checkbox" id="STAFF" value="STAFF">
                 <label class="form-check-label" for="STAFF">
                     Staff
                 </label>
             </div>
             <div class="form-check">
-                <input {{ in_array("CUSTOMER", json_decode($user->roles)) ? "checked" : "" }} class="form-check-input" name="roles[]" type="checkbox" id="CUSTOMER" value="CUSTOMER">
+                <input {{ in_array("CUSTOMER", json_decode($user->roles)) ? "checked" : "" }} class="form-check-input {{ $errors->first('roles') ? "is-invalid" : "" }}" name="roles[]" type="checkbox" id="CUSTOMER" value="CUSTOMER">
                 <label class="form-check-label" for="CUSTOMER">
                     Customer
                 </label>
             </div>
+            <div class="invalid-feedback">
+                {{ $errors->first('roles') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input type="text" class="form-control" name="phone" id="phone" value="{{ $user->phone }}">
+            <input type="text" class="form-control" name="phone" id="phone" value="{{ old('phone') ? old('phone') : $user->phone }}">
+            <div class="invalid-feedback">
+                {{ $errors->first('phone') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="address">Address</label>
-            <textarea class="form-control" name="address" id="address">{{ $user->address }}</textarea>
+            <textarea class="form-control" name="address" id="address">{{ $old->address }} ? {{ $old->address }} : {{ $user->address }}</textarea>
+            <div class="invalid-feedback">
+                {{ $errors->first('address') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="avatar">Avatar</label><br>
@@ -59,18 +67,6 @@
             @endif
             <input type="file" name="avatar" id="avatar"><br>
             <small class="text-muted">Note: Kosongkan jika tidak ingin mengubah avatar</small>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" id="email" value="{{ $user->email }}">
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label for="password_confirm">Password Confirmation</label>
-            <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="Password Confirmation">
         </div>
         <div class="form-group">
             <label class="d-block">Status</label>
@@ -86,6 +82,16 @@
                 <label class="form-check-label" for="status">
                     Inactive
                 </label>
+            </div>
+            <div class="invalid-feedback">
+                {{ $errors->first('status') }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control {{ $errors->first('email') ? "is-invalid" : ""}}" name="email" id="email" disabled>
+            <div class="invalid-feedback">
+                {{ $errors->first('email') }}
             </div>
         </div>
         <div class="form-group">

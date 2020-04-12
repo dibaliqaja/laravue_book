@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -51,6 +52,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+            "name"      => "required|min:5|max:100",
+            "username"  => "required|min:5|max:20",
+            "roles"     => "required",
+            "phone"     => "required|digits_between:10,12",
+            "address"   => "required|min:20|max:200",
+            "avatar"    => "required",
+            "email"     => "required|email",
+            "password"  => "required",
+            "password_confirmation"  => "required|same:password",
+        ])->validate();
+
         $user           = new User();
         $user->name     = $request->get('name');
         $user->username = $request->get('username');
@@ -104,14 +117,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Validator::make($request->all(), [
+            "name"      => "required|min:5|max:100",
+            "roles"     => "required",
+            "phone"     => "required|digits_between:10,12",
+            "address"   => "required|min:20|max:200",
+            "avatar"    => "required",
+        ])->validate();
+
         $user = User::findOrFail($id);
         $user->name     = $request->get('name');
-        $user->username = $request->get('username');
         $user->roles    = json_encode($request->get('roles'));
         $user->address  = $request->get('address');
         $user->phone    = $request->get('phone');
-        $user->email    = $request->get('email');
-        $user->password = Hash::make($request->get('password'));
         $user->status   = $request->get('status');
         if ($request->file('avatar')) {
             if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))) {

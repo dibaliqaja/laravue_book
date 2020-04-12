@@ -6,6 +6,7 @@ use App\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class BookController extends Controller
@@ -47,6 +48,16 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+            "title"         => "required|min:5|max:200",
+            "description"   => "required|min:20|max:1000",
+            "author"        => "required|min:3|max:100",
+            "publisher"     => "required|min:3|max:200",
+            "price"         => "required|digits_between:0,10",
+            "stock"         => "required|digits_between:0,10",
+            "cover"         => "required",
+        ])->validate();
+
         $title              = $request->get('title');
         $save_action        = $request->get('save_action');
         $book               = new Book();
@@ -109,6 +120,15 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Validator::make($request->all(), [
+            "title"         => "required|min:5|max:200",
+            "description"   => "required|min:20|max:1000",
+            "author"        => "required|min:3|max:100",
+            "publisher"     => "required|min:3|max:200",
+            "price"         => "required|digits_between:0,10",
+            "stock"         => "required|digits_between:0,10",
+        ])->validate();
+
         $title              = $request->get('title');
         $book               = Book::findOrFail($id);
         $book->title        = $title;

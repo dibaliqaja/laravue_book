@@ -85,7 +85,6 @@
                     <td>{{ number_format($book->price, 2, ',', '.') }}</td>
                     <td>
                         <a class="btn btn-info btn-sm" href="{{ route('books.edit', [$book->id]) }}">Edit</a>
-                        {{-- <a class="btn btn-warning btn-sm" href="{{ route('books.show', [$book->id]) }}">Show</a> --}}
                         <form action="{{ route('books.destroy', [$book->id]) }}" method="post" onsubmit="return confirm('Move book to trash?')" class="d-inline">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">

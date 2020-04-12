@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -44,6 +45,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+            "name"      => "required|min:3|max:20",
+            "image"     => "required"
+        ])->validate();
+
         $name                   = $request->get('name');
         $category               = new Category();
         $category->name         = $name;
@@ -93,8 +99,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $name               = $request->get('name');
         $category           = Category::findOrFail($id);
+
+        Validator::make($request->all(), [
+            "name"      => "required|min:3|max:20",
+            "image"     => "required",
+        ]);
+
+        $name               = $request->get('name');
         $category->name     = $name;
         if ($request->file('image')) {
             if ($category->image && file_exists(storage_path('app/public/' . $category->image))) {
@@ -176,7 +188,7 @@ class CategoryController extends Controller
     {
         $keyword = $request->get('q');
         $categories = Category::where("name", "LIKE", "%$keyword%")->get();
-        
+
         return $categories;
     }
 }
